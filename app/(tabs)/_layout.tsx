@@ -1,43 +1,58 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Tabs } from "expo-router";
+import { fonts } from "@/misc/settings";
+import { Ionicons } from "@expo/vector-icons";
+import { useSettings } from "@/contexts/SettingsProvider";
+import { useColorScheme } from "react-native";
 
 export default function TabLayout() {
+  const { colors, theme } = useSettings();
   const colorScheme = useColorScheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.black,
+        tabBarStyle: {
+          height: 60,
+          backgroundColor:
+            theme === "light"
+              ? "#E8FFFC"
+              : theme === "dark"
+              ? "#0B0222"
+              : colorScheme === "light"
+              ? "#E8FFFC"
+              : "#0B0222",
+          shadowColor: "transparent",
+          borderTopWidth: 0,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Tasks",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "checkbox-sharp" : "checkbox-outline"}
+              size={19}
+              color={color}
+            />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="settings"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Account",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "person-sharp" : "person-outline"}
+              color={color}
+              size={19}
+            />
+          ),
         }}
       />
     </Tabs>

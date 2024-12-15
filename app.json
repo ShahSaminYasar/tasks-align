@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "task-align",
-    "slug": "task-align",
+    "name": "Tasks Align",
+    "slug": "tasks-align",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -14,8 +14,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#fff"
+      },
+      "package": "com.shah_samin_yasar.tasksalign"
     },
     "web": {
       "bundler": "metro",
@@ -30,12 +31,20 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#302368"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1480f6ad-f138-4465-8b0a-a6dbe0aedeac"
+      }
     }
   }
 }
